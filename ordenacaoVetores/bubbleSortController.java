@@ -18,25 +18,7 @@ public class bubbleSortController {
 				}
 			}
 		}
+		System.out.println("\nVetor ordenado com sucesso!");
 		return vetor;
-		
-		/*int aux;
-		for(int i = 0; i < (vetor.length); i++) {
-			for (int j = i + 1; j < vetor.length; j++) {
-				if (vetor[j] > vetor[j + 1]) {
-					aux = vetor[j];
-					vetor[j] = vetor[j + 1];
-					vetor[j + 1] = aux;
-				}
-			}
-		}
-		exibirOrdenacao(vetor);*/
-	}
-	
-	public void exibirOrdenacao(int[] vetor) {
-		System.out.println("\nVetor ordenado: ");
-		for(int elemento : vetor) {
-			System.out.print(" [" + elemento + "] ");
-		}
 	}
 }
