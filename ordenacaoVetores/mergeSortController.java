@@ -6,43 +6,57 @@ public class mergeSortController {
 	}
 	
 	public void ordenar(int[] vetor) {
-		merge(vetor, 0, vetor.length - 1);
+		int[] vetorAuxiliar = new int[vetor.length];
+		merge(vetor, 0, vetor.length - 1, vetorAuxiliar);
+		showFinalMessage();
 	}
 
-	private void merge(int[] vetor, int inicio, int fim) {
-		int meio;
+	private void showFinalMessage() {
+		System.out.print("\nOrdenacao realizada com sucesso!\n");
+	}
+
+	private void merge(int[] vetor, int inicio, int fim, int[] vetorAuxiliar) {
+		int meio = (fim + inicio) / 2;
 		if(inicio < fim) {
-			meio = (inicio + fim) / 2;
-			merge(vetor, inicio, meio);
-			merge(vetor, meio, fim);
-			intercalar(vetor, inicio, fim, meio);
+			
+			merge(vetor, inicio, meio, vetorAuxiliar);
+			merge(vetor, meio + 1, fim, vetorAuxiliar);
+			performOrdination(vetor, inicio, meio, fim, vetorAuxiliar);
 		}
 		
 	}
 
-	private void intercalar(int[] vetor, int inicio, int fim, int meio) {
-		int posicaoLivre, posicaoA, posicaoB;
-		int[] vetorAuxiliar = new int[vetor.length];
-		
-		posicaoA = inicio;
-		posicaoB = meio + 1;
-		posicaoLivre = inicio;
-		
-		while(posicaoA <= meio && posicaoB <= fim) {
-			if (vetor[posicaoA] <= vetor[posicaoB]) {
-				vetorAuxiliar[posicaoLivre++] = vetor[posicaoB];
+	private void performOrdination(int[] vetor, int inicio, int meio, int fim, int[]vetorAuxiliar) {
+		int i = inicio;
+		int j = meio + 1;
+		int k = 0;
+		while(i <= meio && j <= fim) {
+			if(vetor[i] <= vetor[j]) {
+				vetorAuxiliar[k] = vetor[i];
+				k++;
+				i++;
 			} else {
-				vetorAuxiliar[posicaoLivre++] = vetor[posicaoB];
+				vetorAuxiliar[k] = vetor[j];
+				k++;
+				j++;
 			}
 		}
-		for(int i = posicaoA; i <= meio; i++) {
-			vetorAuxiliar[posicaoLivre++] = vetor[i];
+		while(i <= meio) {
+			vetorAuxiliar[k] = vetor[i];
+			k++;
+			i++;
 		}
-		for(int i = posicaoB; i <= fim; i++) {
-			vetorAuxiliar[posicaoLivre++] = vetor[i];
+		while(j <= fim) {
+			vetorAuxiliar[k] = vetor[j];
+			k++;
+			j++;
 		}
-		for(int i = inicio; i <= fim; i++) {
-			vetor[posicaoLivre++] = vetorAuxiliar[i];
+		i = inicio;
+		k = 0;
+		while(i <= fim) {
+			vetor[i] = vetorAuxiliar[k];
+			i++;
+			k++;
 		}
 	}
 }

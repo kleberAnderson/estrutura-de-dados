@@ -1,7 +1,8 @@
 package ordenacaoVetores;
 
 import java.util.Random;
-import java.util.Scanner;
+
+import javax.swing.JOptionPane;
 
 public class view {
 	public static void main(String[] args) {
@@ -10,15 +11,10 @@ public class view {
 			
 		bubbleSortController bubble = new bubbleSortController();
 		mergeSortController sort = new mergeSortController();
-		
-		Scanner leitor = new Scanner(System.in);
 		int opc = 0;
 		
 		do {
-			System.out.println("\nMenu de Ordenação\n 1 - preencher vetor\n 2 - mostrar vetor\n 3 - BubbleSort\n 4 - mergeSort");
-			System.out.print("Digite uma das opções: ");
-			opc = leitor.nextInt();
-			leitor.nextLine();
+			opc = Integer.parseInt(JOptionPane.showInputDialog("Menu de Ordenação\n 1 - preencher vetor\n 2 - mostrar vetor\n 3 - BubbleSort\n 4 - mergeSort\n 9 - Encerrar"));
 			switch (opc) {
 			case 1: preencherVetor(vetor);
 				break;
@@ -28,14 +24,14 @@ public class view {
 				break;
 			case 4: sort.ordenar(vetor);
 				break;
+			case 9: System.out.println("\nFim do programa!");
+				break;
 			default:
-				System.out.println("Opção inválida.");;
+				System.out.println("Opção inválida, Digite novamente");;
 			}
 			
 		}while(opc != 9);
 		
-		System.out.println("Fim do Programa.");
-		leitor.close();
 	}
 
 	private static void mostrarVetor(int[] vetor) {
